@@ -155,10 +155,9 @@ def training_performance(val_loss, best_val, acc, best_acc, bad_counter, epoch, 
         return best_val, best_acc, best_epoch, bad_counter
     else:
         if val_loss < best_val:
-            if acc > best_acc:
-                best_acc = acc
-                best_epoch = epoch
-                best_val = val_loss
+            best_acc = acc
+            best_epoch = epoch
+            best_val = val_loss
 
         return best_val, best_acc, best_epoch
 
