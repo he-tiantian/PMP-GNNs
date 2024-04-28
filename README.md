@@ -8,7 +8,7 @@ DGL (>=0.9.1)
 
 Please unzip data.zip before running the python files in the corresponding folders.
 
-As there are no pre/post process or early stopping control and different GPU/CUDA platforms might be used, the performances might be slightly different from those reported in the paper.
+As there are no pre/post process or early stopping control and different GPU/CUDA platforms might be used, the performances might slightly change.
 
 If you are interested in using the source code and data released here, please cite our paper:
 
