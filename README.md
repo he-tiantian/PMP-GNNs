@@ -3,8 +3,8 @@ A baseline implementation of Polarized message-passing graph neural networks tha
 
 Requirements:
 Python (>=3.8)
-PyTorch (>=1.8.1)
-DGL (>=0.6.1)
+PyTorch (>=1.9.0)
+DGL (>=0.9.1)
 
 Please unzip data.zip before running the python files in the corresponding folders.
 
