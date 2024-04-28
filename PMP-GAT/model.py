@@ -30,15 +30,6 @@ def position_loss(hlatp, weights, graph):
         return lp_loss
 
 
-def dist_loss(d, graph):
-    with graph.local_scope():
-        pdist = edge_softmax(graph, (-1.0) * d)
-        Edist = pdist * d
-        Edist = torch.sum(Edist, dim=-1) + torch.sum(torch.pow(pdist, 2), dim=-1)
-        Edist = Edist / graph.number_of_nodes()
-        return Edist
-
-
 def breg_divergence_in_graph_eu(h, graph):
     with graph.local_scope():
         graph.srcdata.update({"sh": h})
@@ -170,7 +161,7 @@ class PMPLayer(nn.Module):
             self.autobalance = False
 
         if self.WL:
-            self.epsilon = nn.Parameter(torch.zeros(size=(1, 1)))
+            self.theta = nn.Parameter(torch.zeros(size=(1, 1)))
 
         self.reset_parameters()
 
@@ -193,7 +184,7 @@ class PMPLayer(nn.Module):
 
         # learnable parameter for WL
         if self.WL:
-            nn.init.xavier_normal_(self.epsilon.data, gain=1.414)
+            nn.init.xavier_normal_(self.theta.data, gain=1.414)
 
     def set_allow_zero_in_degree(self, set_value):
         self._allow_zero_in_degree = set_value
@@ -224,7 +215,7 @@ class PMPLayer(nn.Module):
 
             if self.WL:
                 in_degree = (graph.in_degrees() + 1e-9).unsqueeze(dim=1).unsqueeze(dim=1)
-                perm = 1e-9 / (torch.exp(-self.epsilon) + 1)
+                perm = 1e-9 / (torch.exp(-self.theta) + 1)
                 perm = perm / in_degree
                 permfeat = self.WL_drop(feat_src * perm)
 
