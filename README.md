@@ -1,5 +1,5 @@
 # PMP-GNNs
-A baseline implementation of Polarized message-passing graph neural networks that is published in Artificial Intelligence, 2024.
+A baseline implementation of Polarized message-passing graph neural networks published in Artificial Intelligence, 2024.
 
 Requirements:
 Python (>=3.8)
